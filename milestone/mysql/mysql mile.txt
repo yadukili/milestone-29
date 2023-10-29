@@ -1,0 +1,165 @@
+1 
+
+create a table with suitable constraints and fill the table with following datasheet
+
+
+mysql> select * from teacher;
++------+--------------+------------+----------------+--------+------+
+| no   | name         | dept       | admission_date | salary | sex  |
++------+--------------+------------+----------------+--------+------+
+|    1 | ajayan       | physics    | 2016-07-07     |  33000 | m    |
+|    2 | sheena       | physics    | 2011-07-07     |  43000 | f    |
+|    3 | jayaprasanna | history    | 2015-07-07     |  32000 | f    |
+|    4 | vichu        | history    | 2015-07-07     |  38000 | m    |
+|    5 | laya         | computer   | 2018-06-06     |   9000 | f    |
+|    6 | kunjumma     | cleaning   | 2000-06-06     |   8000 | f    |
+|    7 | pankan       | chemimstry | 1990-05-27     | 118000 | m    |
+|    8 | mersha       | computer   | 2000-01-01     |  12000 | m    |
++------+--------------+------------+----------------+--------+------+
+
+
+2 
+
+write an sql querry to display all the information of teachers in computer dept
+
+mysql> select * from teacher where dept="computer";
++------+--------+----------+----------------+--------+------+
+| no   | name   | dept     | admission_date | salary | sex  |
++------+--------+----------+----------------+--------+------+
+|    5 | laya   | computer | 2018-06-06     |   9000 | f    |
+|    8 | mersha | computer | 2000-01-01     |  12000 | m    |
++------+--------+----------+----------------+--------+------+
+
+
+3 
+
+write a querry to list the name of female teacher in history dept
+
+mysql> select name from teacher where dept="history" and sex="f";
++--------------+
+| name         | 
++--------------+
+| jayaprasanna |
++--------------+
+
+
+4 
+
+list all names of teacher with date of admission in ascending order
+
+
+mysql> select name from teacher order by admission_date;
++--------------+
+| name         |
++--------------+
+| pankan       |
+| mersha       |
+| kunjumma     |
+| sheena       |
+| jayaprasanna |
+| vichu        |
+| ajayan       |
+| laya         |
++--------------+
+
+5 
+
+display teacher's name department and salary of male teacher
+
+
+mysql> select name,dept,salary from teacher where sex="m";
++--------+------------+--------+
+| name   | dept       | salary |
++--------+------------+--------+
+| ajayan | physics    |  33000 |
+| vichu  | history    |  38000 |
+| pankan | chemimstry | 118000 |
+| mersha | computer   |  12000 |
++--------+------------+--------+
+
+
+6 
+
+To count the numberof items whose salary is less than 10,000
+
+
+mysql> select count(*) from teacher where salary<10000;
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+
+
+7
+
+ to insert a new record in the teacher table with the following data: 8,"mersha","computer",{1/1/2000},12000,"m"
+
+
+
+mysql> insert into teacher values (8,"mersha","computer","2000-01-01",12000,"m");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from teacher;
++------+--------------+------------+----------------+--------+------+
+| no   | name         | dept       | admission_date | salary | sex  |
++------+--------------+------------+----------------+--------+------+
+|    1 | ajayan       | physics    | 2016-07-07     |  33000 | m    |
+|    2 | sheena       | physics    | 2011-07-07     |  43000 | f    |
+|    3 | jayaprasanna | history    | 2015-07-07     |  32000 | f    |
+|    4 | vichu        | history    | 2015-07-07     |  38000 | m    |
+|    5 | laya         | computer   | 2018-06-06     |   9000 | f    |
+|    6 | kunjumma     | cleaning   | 2000-06-06     |   8000 | f    |
+|    7 | pankan       | chemimstry | 1990-05-27     | 118000 | m    |
+|    8 | mersha       | computer   | 2000-01-01     |  12000 | m    |
+|    8 | mersha       | computer   | 2000-01-01     |  12000 | m    |
++------+--------------+------------+----------------+--------+------+
+
+
+8 
+
+list the teacher details who is getting the minimum salary
+
+
+
+
+mysql> select * from teacher where salary =(select min(salary) from teacher)  ;
++------+----------+----------+----------------+--------+------+
+| no   | name     | dept     | admission_date | salary | sex  |
++------+----------+----------+----------------+--------+------+
+|    6 | kunjumma | cleaning | 2000-06-06     |   8000 | f    |
++------+----------+----------+----------------+--------+------+
+
+
+9
+
+list the teacher detail who is getting the second minimum salary
+
+
+ select * from teacher order by salary limit 1 offset 1;
++------+------+----------+----------------+--------+------+
+| no   | name | dept     | admission_date | salary | sex  |
++------+------+----------+----------------+--------+------+
+|    5 | laya | computer | 2018-06-06     |   9000 | f    |
++------+------+----------+----------------+--------+------+
+
+
+
+
+
+
+
+
+
+10
+
+list avg salary of teachers belongint to history dept
+
+
+
+mysql> select avg(salary) from teacher where dept="history";
++-------------+
+| avg(salary) |
++-------------+
+|  35000.0000 |
++-------------+
